@@ -1,0 +1,42 @@
+﻿<Window x:Class="KalmDownCSharp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModel="clr-namespace:KalmDownCSharp.ViewModels"
+        mc:Ignorable="d" 
+        Title="MainWindow" Height="300" Width="600">
+
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
+    
+    <Window.Resources>
+        <ResourceDictionary>
+            <Style x:Key="TimerTextStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="80"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Padding" Value="10"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+
+
+    <Grid Margin="30, 0, 30, 0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+        
+        <Label Grid.Column="0" Content="{Binding Gap.GapMin, StringFormat=3}" Style="{StaticResource TimerTextStyle}"/>
+        <Label Grid.Column="1" Content=":" Style="{StaticResource TimerTextStyle}"/>
+        <Label Grid.Column="2" Content="{Binding Gap.GapSec}" Style="{StaticResource TimerTextStyle}"/>
+        <Label Grid.Column="3" Content=":" Style="{StaticResource TimerTextStyle}"/>
+        <Label Grid.Column="4" Content="{Binding Gap.GapMilli}" Style="{StaticResource TimerTextStyle}"/>
+    </Grid>
+</Window>
