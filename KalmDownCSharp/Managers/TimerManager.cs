@@ -6,21 +6,21 @@
 
     internal class TimerManager
     {
-        private readonly DispatcherTimer kdTimer;
+        private readonly DispatcherTimer timer;
         private readonly DateTime deadline;
         private readonly TimeGap gap;
 
         public TimerManager(TimeGap gap)
         {
+            // Create & Allocate Instances
+            timer = new DispatcherTimer();
+            deadline = DateTime.Now + new TimeSpan(0, 5, 0);
             this.gap = gap;
 
-            deadline = DateTime.Now + new TimeSpan(0, 5, 0);
-
-            kdTimer = new DispatcherTimer();
-            kdTimer.Tick += new EventHandler(kdTimer_Tick);
-            kdTimer.Interval = new TimeSpan(0, 0, 0, 0, 10); // 10 milliseconds
-
-            kdTimer.Start();
+            // Set Timer
+            timer.Tick += new EventHandler(kdTimer_Tick);
+            timer.Interval = new TimeSpan(0, 0, 0, 0, 10); // 10 milliseconds
+            timer.Start();
         }
 
         private void kdTimer_Tick(object sender, EventArgs e)

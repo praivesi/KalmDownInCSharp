@@ -13,7 +13,6 @@
             set
             {
                 this.gapMin = value;
-
                 this.OnPropertyChanged("GapMin");
             }
         }
@@ -27,7 +26,6 @@
             set
             {
                 this.gapSec = value;
-
                 this.OnPropertyChanged("GapSec");
             }
         }
@@ -52,6 +50,12 @@
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string name)
-            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
+        }
     }
 }
