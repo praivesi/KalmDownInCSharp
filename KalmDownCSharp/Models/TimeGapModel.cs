@@ -2,7 +2,7 @@
 {
     using System.ComponentModel;
 
-    internal class TimeGap : INotifyPropertyChanged
+    internal class TimeGapModel : INotifyPropertyChanged
     {
         public int GapMin
         {

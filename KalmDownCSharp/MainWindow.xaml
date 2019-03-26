@@ -5,12 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModel="clr-namespace:KalmDownCSharp.ViewModels"
         mc:Ignorable="d" 
-        Title="MainWindow" Height="300" Width="600">
+        Title="MainWindow" Height="400" Width="600">
 
+<!-- Setting data context-->
     <Window.DataContext>
         <viewModel:MainViewModel/>
     </Window.DataContext>
     
+ <!-- Resources -->
     <Window.Resources>
         <ResourceDictionary>
             <Style x:Key="TimerTextStyle" TargetType="Label">
@@ -23,20 +25,58 @@
         </ResourceDictionary>
     </Window.Resources>
 
-
+<!-- UI Components -->
     <Grid Margin="30, 0, 30, 0">
+        <Grid.Triggers>
+            <EventTrigger RoutedEvent="MouseEnter">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ColorAnimation 
+                            Storyboard.TargetName="minuteLabel"
+                            Storyboard.TargetProperty="Foreground.(SolidColorBrush.Color)"
+                            From="Yellow" To="Purple" Duration="0:0:2" RepeatBehavior="Forever"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="MouseEnter">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ThicknessAnimation
+                            Storyboard.TargetName="robot"
+                            Storyboard.TargetProperty="Margin"
+                            From="10, 0, 0, 0" To="600, 0, 0, 0" Duration="0:0:10"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Grid.Triggers>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="200"/>
+        </Grid.RowDefinitions>
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="150"/>
-            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="200"/>
         </Grid.ColumnDefinitions>
+
+        <WrapPanel Grid.Row="0" Grid.ColumnSpan="5">
+            <Rectangle x:Name="robot" Width="100" Height="100" Margin="0" Stroke="Black" 
+                       HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/Resources/robot.png" Stretch="Uniform"/>
+                </Rectangle.Fill>
+            </Rectangle>
+        </WrapPanel>
         
-        <Label Grid.Column="0" Content="{Binding Gap.GapMin, StringFormat=3}" Style="{StaticResource TimerTextStyle}"/>
-        <Label Grid.Column="1" Content=":" Style="{StaticResource TimerTextStyle}"/>
-        <Label Grid.Column="2" Content="{Binding Gap.GapSec}" Style="{StaticResource TimerTextStyle}"/>
-        <Label Grid.Column="3" Content=":" Style="{StaticResource TimerTextStyle}"/>
-        <Label Grid.Column="4" Content="{Binding Gap.GapMilli}" Style="{StaticResource TimerTextStyle}"/>
+        <Label Grid.Row="1" Grid.Column="0" x:Name="minuteLabel" Content="{Binding GapModel.GapMin, StringFormat=3}" Style="{StaticResource TimerTextStyle}"/>
+        <Label Grid.Row="1" Grid.Column="1" Content=":" Style="{StaticResource TimerTextStyle}"/>
+        <Label Grid.Row="1" Grid.Column="2" Content="{Binding GapModel.GapSec}" Style="{StaticResource TimerTextStyle}"/>
+        <Label Grid.Row="1" Grid.Column="3" Content=":" Style="{StaticResource TimerTextStyle}"/>
+        <Label Grid.Row="1" Grid.Column="4" Content="{Binding GapModel.GapMilli}" Style="{StaticResource TimerTextStyle}"/>
+
     </Grid>
 </Window>

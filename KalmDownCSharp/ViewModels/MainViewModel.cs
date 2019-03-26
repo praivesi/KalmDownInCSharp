@@ -7,13 +7,13 @@
     internal class MainViewModel : INotifyPropertyChanged
     {
         private readonly TimerManager timerManager;
-        private readonly TimeGap gap;
+        private readonly TimeGapModel gapModel;
 
-        public TimeGap Gap
+        public TimeGapModel GapModel
         {
             get
             {
-                return this.gap;
+                return this.gapModel;
             }
             set
             {
@@ -23,8 +23,8 @@
 
         public MainViewModel()
         {
-            this.gap = new TimeGap();
-            this.timerManager = new TimerManager(this.gap);
+            this.gapModel = new TimeGapModel();
+            this.timerManager = new TimerManager(this.gapModel);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

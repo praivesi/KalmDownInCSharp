@@ -7,15 +7,17 @@
     internal class TimerManager
     {
         private readonly DispatcherTimer timer;
+        private readonly TimeGapModel gapModel;
         private readonly DateTime deadline;
-        private readonly TimeGap gap;
+        private TimeSpan currentGap;
 
-        public TimerManager(TimeGap gap)
+        public TimerManager(TimeGapModel gapModel)
         {
             // Create & Allocate Instances
             timer = new DispatcherTimer();
-            deadline = DateTime.Now + new TimeSpan(0, 5, 0);
-            this.gap = gap;
+            //deadline = DateTime.Now + new TimeSpan(0, 5, 0);
+            deadline = DateTime.Now + new TimeSpan(0, 0, 10);
+            this.gapModel = gapModel;
 
             // Set Timer
             timer.Tick += new EventHandler(kdTimer_Tick);
@@ -25,11 +27,23 @@
 
         private void kdTimer_Tick(object sender, EventArgs e)
         {
-            var gapTime = this.deadline - DateTime.Now;
+            this.currentGap = this.deadline - DateTime.Now;
 
-            this.gap.GapMin = gapTime.Minutes;
-            this.gap.GapSec = gapTime.Seconds;
-            this.gap.GapMilli = gapTime.Milliseconds;
+            if (this.currentGap <= TimeSpan.Zero)
+            {
+                timer.Stop();
+
+                this.gapModel.GapMin = 0;
+                this.gapModel.GapSec = 0;
+                this.gapModel.GapMilli = 0;
+
+            }
+            else
+            {
+                this.gapModel.GapMin = this.currentGap.Minutes;
+                this.gapModel.GapSec = this.currentGap.Seconds;
+                this.gapModel.GapMilli = this.currentGap.Milliseconds;
+            }
         }
     }
 }
