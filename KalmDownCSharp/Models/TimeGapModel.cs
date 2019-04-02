@@ -4,7 +4,7 @@
 
     internal class TimeGapModel : INotifyPropertyChanged
     {
-        public int GapMin
+        public string GapMin
         {
             get
             {
@@ -17,7 +17,7 @@
             }
         }
 
-        public int GapSec
+        public string GapSec
         {
             get
             {
@@ -30,7 +30,7 @@
             }
         }
 
-        public int GapMilli
+        public string GapMilli
         {
             get
             {
@@ -43,9 +43,9 @@
             }
         }
 
-        private int gapMin;
-        private int gapSec;
-        private int gapMilli;
+        private string gapMin;
+        private string gapSec;
+        private string gapMilli;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
