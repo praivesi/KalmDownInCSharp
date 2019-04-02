@@ -6,7 +6,9 @@
         xmlns:viewModel="clr-namespace:KalmDownCSharp.ViewModels"
         mc:Ignorable="d"
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
-        Title="MainWindow" Height="180" Width="440" AllowsTransparency="True" WindowStyle="None" MouseDown="MainWindow_MouseDown">
+        Title="MainWindow" Height="200" Width="440"
+        AllowsTransparency="True" MouseDown="MainWindow_MouseDown"
+        WindowStyle="None" Background="Transparent">
 
     <!-- Setting data context-->
     <Window.DataContext>
@@ -18,22 +20,19 @@
         <ResourceDictionary>
             <Style x:Key="TimerTextStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="80"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="Foreground" Value="White"/>
                 <Setter Property="HorizontalAlignment" Value="Center"/>
                 <Setter Property="VerticalAlignment" Value="Top"/>
-                <Setter Property="FontWeight" Value="Bold"/>
                 <Setter Property="Margin" Value="0, -20, 0, 0"/>
             </Style>
         </ResourceDictionary>
     </Window.Resources>
 
     <!-- UI Components -->
-    <Window.Background>
-        <ImageBrush ImageSource="Images/bgGrass.png"/>
-    </Window.Background>
-
     <Grid>
         <Grid.Triggers>
-        <!-- StoryBoards -->
+            <!-- StoryBoards -->
             <EventTrigger RoutedEvent="Loaded">
                 <BeginStoryboard>
                     <Storyboard>
