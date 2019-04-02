@@ -4,79 +4,74 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModel="clr-namespace:KalmDownCSharp.ViewModels"
-        mc:Ignorable="d" 
-        Title="MainWindow" Height="400" Width="600">
+        mc:Ignorable="d"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
+        Title="MainWindow" Height="180" Width="440" AllowsTransparency="True" WindowStyle="None" MouseDown="MainWindow_MouseDown">
 
-<!-- Setting data context-->
+    <!-- Setting data context-->
     <Window.DataContext>
         <viewModel:MainViewModel/>
     </Window.DataContext>
-    
- <!-- Resources -->
+
+    <!-- Resources -->
     <Window.Resources>
         <ResourceDictionary>
             <Style x:Key="TimerTextStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="80"/>
                 <Setter Property="HorizontalAlignment" Value="Center"/>
-                <Setter Property="VerticalAlignment" Value="Center"/>
-                <Setter Property="Padding" Value="10"/>
+                <Setter Property="VerticalAlignment" Value="Top"/>
                 <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="Margin" Value="0, -20, 0, 0"/>
             </Style>
         </ResourceDictionary>
     </Window.Resources>
 
-<!-- UI Components -->
-    <Grid Margin="30, 0, 30, 0">
+    <!-- UI Components -->
+    <Window.Background>
+        <ImageBrush ImageSource="Images/bgGrass.png"/>
+    </Window.Background>
+
+    <Grid>
         <Grid.Triggers>
-            <EventTrigger RoutedEvent="MouseEnter">
-                <BeginStoryboard>
-                    <Storyboard>
-                        <ColorAnimation 
-                            Storyboard.TargetName="minuteLabel"
-                            Storyboard.TargetProperty="Foreground.(SolidColorBrush.Color)"
-                            From="Yellow" To="Purple" Duration="0:0:2" RepeatBehavior="Forever"/>
-                    </Storyboard>
-                </BeginStoryboard>
-            </EventTrigger>
-            <EventTrigger RoutedEvent="MouseEnter">
+        <!-- StoryBoards -->
+            <EventTrigger RoutedEvent="Loaded">
                 <BeginStoryboard>
                     <Storyboard>
                         <ThicknessAnimation
-                            Storyboard.TargetName="robot"
+                            Storyboard.TargetName="cat"
                             Storyboard.TargetProperty="Margin"
-                            From="10, 0, 0, 0" To="600, 0, 0, 0" Duration="0:0:10"/>
+                            From="10, 20, 0, 0" To="250, 20, 0, 0" Duration="0:0:10"/>
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>
         </Grid.Triggers>
-        
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="200"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="80"/>
         </Grid.RowDefinitions>
-        
+
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="70"/>
             <ColumnDefinition Width="50"/>
-            <ColumnDefinition Width="150"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="110"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="160"/>
         </Grid.ColumnDefinitions>
 
         <WrapPanel Grid.Row="0" Grid.ColumnSpan="5">
-            <Rectangle x:Name="robot" Width="100" Height="100" Margin="0" Stroke="Black" 
-                       HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Rectangle.Fill>
-                    <ImageBrush ImageSource="/Resources/robot.png" Stretch="Uniform"/>
-                </Rectangle.Fill>
-            </Rectangle>
+            <Grid x:Name="cat" Width="150" Height="80" Margin="0, 20, 0 0"
+                  VerticalAlignment="Bottom" RenderTransformOrigin="0.5, 0.5">
+                <Image Margin="0"
+                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                       gif:ImageBehavior.AnimatedSource="Images/walkingCat.gif"/>
+            </Grid>
         </WrapPanel>
-        
-        <Label Grid.Row="1" Grid.Column="0" x:Name="minuteLabel" Content="{Binding GapModel.GapMin, StringFormat=3}" Style="{StaticResource TimerTextStyle}"/>
+
+        <Label Grid.Row="1" Grid.Column="0" x:Name="minuteLabel" Content="{Binding GapModel.GapMin}" Style="{StaticResource TimerTextStyle}"/>
         <Label Grid.Row="1" Grid.Column="1" Content=":" Style="{StaticResource TimerTextStyle}"/>
         <Label Grid.Row="1" Grid.Column="2" Content="{Binding GapModel.GapSec}" Style="{StaticResource TimerTextStyle}"/>
         <Label Grid.Row="1" Grid.Column="3" Content=":" Style="{StaticResource TimerTextStyle}"/>
         <Label Grid.Row="1" Grid.Column="4" Content="{Binding GapModel.GapMilli}" Style="{StaticResource TimerTextStyle}"/>
-
     </Grid>
 </Window>

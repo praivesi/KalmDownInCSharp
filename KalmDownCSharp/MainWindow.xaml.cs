@@ -11,5 +11,10 @@
         {
             InitializeComponent();
         }
+
+        private void MainWindow_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
     }
 }
