@@ -6,7 +6,7 @@
         xmlns:viewModel="clr-namespace:KalmDownCSharp.ViewModels"
         mc:Ignorable="d"
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
-        Title="MainWindow" Height="200" Width="440"
+        Title="MainWindow" Width="440" Height="210"
         AllowsTransparency="True" MouseDown="MainWindow_MouseDown"
         WindowStyle="None" Background="Transparent">
 
@@ -25,6 +25,22 @@
                 <Setter Property="HorizontalAlignment" Value="Center"/>
                 <Setter Property="VerticalAlignment" Value="Top"/>
                 <Setter Property="Margin" Value="0, -20, 0, 0"/>
+            </Style>
+            <Style x:Key="DefaultButtonStyle" TargetType="{x:Type Button}">
+                <Setter Property="OverridesDefaultStyle" Value="True" />
+                <Setter Property="Cursor" Value="Hand" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Name="border" BorderThickness="0" BorderBrush="Black" Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True"/>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
             </Style>
         </ResourceDictionary>
     </Window.Resources>
@@ -48,6 +64,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="80"/>
+            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -67,10 +84,75 @@
             </Grid>
         </WrapPanel>
 
-        <Label Grid.Row="1" Grid.Column="0" x:Name="minuteLabel" Content="{Binding GapModel.GapMin}" Style="{StaticResource TimerTextStyle}"/>
-        <Label Grid.Row="1" Grid.Column="1" Content=":" Style="{StaticResource TimerTextStyle}"/>
-        <Label Grid.Row="1" Grid.Column="2" Content="{Binding GapModel.GapSec}" Style="{StaticResource TimerTextStyle}"/>
-        <Label Grid.Row="1" Grid.Column="3" Content=":" Style="{StaticResource TimerTextStyle}"/>
-        <Label Grid.Row="1" Grid.Column="4" Content="{Binding GapModel.GapMilli}" Style="{StaticResource TimerTextStyle}"/>
+        <Label x:Name="minLabel" Grid.Row="1" Grid.Column="0" Content="{Binding GapModel.GapMin}" Style="{StaticResource TimerTextStyle}"/>
+        <Label x:Name="m2sLabel" Grid.Row="1" Grid.Column="1" Content=":" Style="{StaticResource TimerTextStyle}"/>
+        <Label x:Name="secLabel" Grid.Row="1" Grid.Column="2" Content="{Binding GapModel.GapSec}" Style="{StaticResource TimerTextStyle}"/>
+        <Label x:Name="s2mLabel" Grid.Row="1" Grid.Column="3" Content=":" Style="{StaticResource TimerTextStyle}"/>
+        <Label x:Name="milliLabel" Grid.Row="1" Grid.Column="4" Content="{Binding GapModel.GapMilli}" Style="{StaticResource TimerTextStyle}"/>
+
+        <WrapPanel Grid.Row="2" Grid.ColumnSpan="5" HorizontalAlignment="Right">
+            <Grid>
+                <Grid.Triggers>
+                    <EventTrigger RoutedEvent="MouseEnter">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation
+                                    Storyboard.TargetName="settingsBtn"
+                                    Storyboard.TargetProperty="Opacity"
+                                    To="1.0" Duration="0:0:1"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="MouseLeave">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation
+                                    Storyboard.TargetName="settingsBtn"
+                                    Storyboard.TargetProperty="Opacity"
+                                    To="0.3" Duration="0:0:1"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Grid.Triggers>
+                <Button x:Name="settingsBtn" Height="30" Width="30" Margin="0, 0, 0, 0"
+                    Style="{StaticResource DefaultButtonStyle}"
+                   BorderThickness="0" Opacity="0.3" Click="settingsBtn_ButtonClick">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Images/setting.png"/>
+                    </Button.Background>
+                </Button>
+            </Grid>
+            <Grid>
+                <Grid.Triggers>
+                    <EventTrigger RoutedEvent="MouseEnter">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation
+                                    Storyboard.TargetName="exitBtn"
+                                    Storyboard.TargetProperty="Opacity"
+                                    To="1.0" Duration="0:0:1"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="MouseLeave">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation
+                                      Storyboard.TargetName="exitBtn"
+                                      Storyboard.TargetProperty="Opacity"
+                                      To="0.3" Duration="0:0:1"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Grid.Triggers>
+                <Button x:Name="exitBtn" Height="25" Width="25"
+                        Style="{StaticResource DefaultButtonStyle}"
+                        BorderThickness="0" Opacity="0.3">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Images/poweroff.png"/>
+                    </Button.Background>
+                </Button>
+            </Grid>
+        </WrapPanel>
     </Grid>
 </Window>

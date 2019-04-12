@@ -16,5 +16,10 @@
         {
             this.DragMove();
         }
+
+        private void settingsBtn_ButtonClick(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
