@@ -1,5 +1,7 @@
 ﻿namespace KalmDownCSharp
 {
+    using KalmDownCSharp.UIs;
+    using System;
     using System.Windows;
 
     /// <summary>
@@ -19,7 +21,14 @@
 
         private void settingsBtn_ButtonClick(object sender, RoutedEventArgs e)
         {
+            var settingsWindow = new SettingWindow();
 
+            settingsWindow.ShowDialog();
+        }
+
+        private void exitBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 }

@@ -147,7 +147,8 @@
                 </Grid.Triggers>
                 <Button x:Name="exitBtn" Height="25" Width="25"
                         Style="{StaticResource DefaultButtonStyle}"
-                        BorderThickness="0" Opacity="0.3">
+                        BorderThickness="0" Opacity="0.3" Margin="0,3,-0.2,0" VerticalAlignment="Top"
+                        Click="exitBtn_Click">
                     <Button.Background>
                         <ImageBrush ImageSource="Images/poweroff.png"/>
                     </Button.Background>
