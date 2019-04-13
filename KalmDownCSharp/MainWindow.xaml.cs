@@ -1,6 +1,7 @@
 ﻿namespace KalmDownCSharp
 {
     using KalmDownCSharp.UIs;
+    using KalmDownCSharp.ViewModels;
     using System;
     using System.Windows;
 
@@ -9,9 +10,17 @@
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        private readonly ISettingWindowViewModel settingWindowVM;
+
+        public MainWindow(
+            ISettingWindowViewModel settingWindowVM,
+            IMainWindowViewModel mainWindowVM)
         {
             InitializeComponent();
+
+            this.settingWindowVM = settingWindowVM;
+
+            this.DataContext = mainWindowVM;
         }
 
         private void MainWindow_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -21,7 +30,7 @@
 
         private void settingsBtn_ButtonClick(object sender, RoutedEventArgs e)
         {
-            var settingsWindow = new SettingWindow();
+            var settingsWindow = new SettingWindow(this.settingWindowVM);
 
             settingsWindow.ShowDialog();
         }

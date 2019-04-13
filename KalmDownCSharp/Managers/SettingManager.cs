@@ -4,7 +4,7 @@
     using System.Windows;
     using System.Windows.Media;
 
-    internal class SettingManager
+    internal class SettingManager : ISettingManager
     {
         public SettingModel Settings { get; private set; }
 

@@ -9,15 +9,16 @@
     /// </summary>
     public partial class SettingWindow : Window
     {
-        private SettingWindowViewModel vm;
+        private readonly ISettingWindowViewModel vm;
+
         private ObservableCollection<string> minuteCbItems;
         private ObservableCollection<string> secondCbItems;
 
-        public SettingWindow()
+        public SettingWindow(ISettingWindowViewModel vm)
         {
             InitializeComponent();
 
-            this.vm = new SettingWindowViewModel();
+            this.vm = vm;
             this.minuteCbItems = new ObservableCollection<string>();
             this.secondCbItems = new ObservableCollection<string>();
 

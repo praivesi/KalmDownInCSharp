@@ -3,18 +3,12 @@
     using KalmDownCSharp.Managers;
     using System.Windows.Media;
 
-    internal class SettingWindowViewModel
+    internal class SettingWindowViewModel : ISettingWindowViewModel
     {
-        private SettingManager settingManager;
+        private readonly ISettingManager settingManager;
 
-        public SettingWindowViewModel()
-        {
-            this.settingManager = new SettingManager();
-        }
+        public SettingWindowViewModel(ISettingManager settingManager) => this.settingManager = settingManager;
 
-        public void Set(string min, string sec, Color? color)
-        {
-            this.settingManager.ChangeSettings(min, sec, color);
-        }
+        public void Set(string min, string sec, Color? color) => this.settingManager.ChangeSettings(min, sec, color);
     }
 }

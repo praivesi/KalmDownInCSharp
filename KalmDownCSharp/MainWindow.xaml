@@ -6,14 +6,10 @@
         xmlns:viewModel="clr-namespace:KalmDownCSharp.ViewModels"
         mc:Ignorable="d"
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
+        xmlns:models="clr-namespace:KalmDownCSharp.Models"
         Title="MainWindow" Width="440" Height="210"
         AllowsTransparency="True" MouseDown="MainWindow_MouseDown"
         WindowStyle="None" Background="Transparent">
-
-    <!-- Setting data context-->
-    <Window.DataContext>
-        <viewModel:MainViewModel/>
-    </Window.DataContext>
 
     <!-- Resources -->
     <Window.Resources>

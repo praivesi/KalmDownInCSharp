@@ -4,9 +4,9 @@
     using KalmDownCSharp.Models;
     using System.ComponentModel;
 
-    internal class MainViewModel : INotifyPropertyChanged
+    internal class MainWindowViewModel : IMainWindowViewModel, INotifyPropertyChanged
     {
-        private readonly TimerManager timerManager;
+        private readonly ITimerManager timerManager;
         private readonly TimeGapModel gapModel;
 
         public TimeGapModel GapModel
@@ -21,10 +21,12 @@
             }
         }
 
-        public MainViewModel()
+        public MainWindowViewModel(ITimerManager timerManager)
         {
             this.gapModel = new TimeGapModel();
-            this.timerManager = new TimerManager(this.gapModel);
+
+            this.timerManager = timerManager;
+            this.timerManager.SetTimeGapObject(this.gapModel);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
