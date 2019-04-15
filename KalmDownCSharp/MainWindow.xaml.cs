@@ -10,23 +10,23 @@
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly IMainWindowViewModel vm;
         private readonly ISettingWindowViewModel settingWindowVM;
 
         public MainWindow(
-            ISettingWindowViewModel settingWindowVM,
-            IMainWindowViewModel mainWindowVM)
+            IMainWindowViewModel vm,
+            ISettingWindowViewModel settingWindowVM)
         {
             InitializeComponent();
 
+            this.vm = vm;
             this.settingWindowVM = settingWindowVM;
 
-            this.DataContext = mainWindowVM;
+            this.DataContext = vm;
+
+            this.vm.CreateCatStoryboard(this.cat, new PropertyPath(MarginProperty)).Begin();
         }
 
-        private void MainWindow_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            this.DragMove();
-        }
 
         private void settingsBtn_ButtonClick(object sender, RoutedEventArgs e)
         {
@@ -35,9 +35,8 @@
             settingsWindow.ShowDialog();
         }
 
-        private void exitBtn_Click(object sender, RoutedEventArgs e)
-        {
-            Environment.Exit(0);
-        }
+        private void MainWindow_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) => this.DragMove();
+
+        private void exitBtn_Click(object sender, RoutedEventArgs e) => Environment.Exit(0);
     }
 }

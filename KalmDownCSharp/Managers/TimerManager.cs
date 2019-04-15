@@ -18,8 +18,7 @@
             // Create & Allocate Instances
             timer = new DispatcherTimer();
 
-            //deadline = DateTime.Now + new TimeSpan(0, 5, 0);
-            deadline = DateTime.Now + new TimeSpan(0, 0, 10);
+            deadline = DateTime.Now + new TimeSpan(0, 5, 0);
 
             // Set Timer
             timer.Tick += new EventHandler(kdTimer_Tick);

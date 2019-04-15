@@ -1,6 +1,7 @@
 ﻿namespace KalmDownCSharp.Managers
 {
     using KalmDownCSharp.Models;
+    using System;
     using System.Windows;
     using System.Windows.Media;
 
@@ -20,5 +21,8 @@
 
             MessageBox.Show("SettingMinute = " + this.Settings.SettingMinute + " / SettingSecond = " + this.Settings.SettingSecond + " / SettingColor = " + this.Settings.SettingColor);
         }
+
+        public Duration GetSettingDuration()
+            => new Duration(new TimeSpan(0, Int32.Parse(this.Settings.SettingMinute), Int32.Parse(this.Settings.SettingSecond)));
     }
 }

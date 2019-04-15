@@ -43,20 +43,6 @@
 
     <!-- UI Components -->
     <Grid>
-        <Grid.Triggers>
-            <!-- StoryBoards -->
-            <EventTrigger RoutedEvent="Loaded">
-                <BeginStoryboard>
-                    <Storyboard>
-                        <ThicknessAnimation
-                            Storyboard.TargetName="cat"
-                            Storyboard.TargetProperty="Margin"
-                            From="10, 20, 0, 0" To="250, 20, 0, 0" Duration="0:0:10"/>
-                    </Storyboard>
-                </BeginStoryboard>
-            </EventTrigger>
-        </Grid.Triggers>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="80"/>
