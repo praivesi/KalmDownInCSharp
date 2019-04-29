@@ -1,10 +1,13 @@
 ﻿namespace KalmDownCSharp.ViewModels
 {
+    using KalmDownCSharp.Commands;
     using KalmDownCSharp.Managers;
     using KalmDownCSharp.Models;
+    using KalmDownCSharp.UIs;
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Input;
     using System.Windows.Media.Animation;
 
     internal class MainWindowViewModel : IMainWindowViewModel, INotifyPropertyChanged
@@ -12,6 +15,10 @@
         private readonly ITimerManager timerManager;
         private readonly ISettingManager settingManager;
         private TimeGapModel gapModel;
+
+        private ICommand showSettingWindowCommand;
+
+        private readonly ISettingWindowViewModel settingWindowVM;
 
         public TimeGapModel GapModel
         {
@@ -26,9 +33,22 @@
             }
         }
 
+        public ICommand ShowSettingWindowCommand
+        {
+            get
+            {
+                return this.showSettingWindowCommand;
+            }
+            set
+            {
+                this.showSettingWindowCommand = value;
+            }
+        }
+
         public MainWindowViewModel(
             ITimerManager timerManager,
-            ISettingManager settingManager)
+            ISettingManager settingManager,
+            ISettingWindowViewModel settingWindowVM)
         {
             this.gapModel = new TimeGapModel();
 
@@ -36,6 +56,10 @@
             this.settingManager = settingManager;
 
             this.timerManager.SetTimeGapObject(this.gapModel);
+
+            this.settingWindowVM = settingWindowVM;
+
+            this.showSettingWindowCommand = new BaseCommand(this.ShowSettingWindow);
         }
 
         public Storyboard CreateCatStoryboard(Grid catGrid, PropertyPath propertyPath)
@@ -51,6 +75,13 @@
             storyboard.Children.Add(animation);
 
             return storyboard;
+        }
+
+        public void ShowSettingWindow(object obj)
+        {
+            var settingsWindow = new SettingWindow(this.settingWindowVM);
+
+            settingsWindow.ShowDialog();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

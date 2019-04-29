@@ -1,6 +1,5 @@
 ﻿namespace KalmDownCSharp
 {
-    using KalmDownCSharp.UIs;
     using KalmDownCSharp.ViewModels;
     using System;
     using System.Windows;
@@ -25,14 +24,6 @@
             this.DataContext = vm;
 
             this.vm.CreateCatStoryboard(this.cat, new PropertyPath(MarginProperty)).Begin();
-        }
-
-
-        private void settingsBtn_ButtonClick(object sender, RoutedEventArgs e)
-        {
-            var settingsWindow = new SettingWindow(this.settingWindowVM);
-
-            settingsWindow.ShowDialog();
         }
 
         private void MainWindow_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) => this.DragMove();

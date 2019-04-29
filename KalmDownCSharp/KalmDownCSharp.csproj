@@ -102,6 +102,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="DI\KalmDownModule.cs" />
     <Compile Include="Managers\ISettingManager.cs" />
     <Compile Include="Managers\ITimerManager.cs" />
