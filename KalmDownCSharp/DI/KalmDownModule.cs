@@ -1,5 +1,6 @@
 ﻿namespace KalmDownCSharp.DI
 {
+    using KalmDownCSharp.Infrastructure;
     using KalmDownCSharp.Managers;
     using KalmDownCSharp.ViewModels;
     using Ninject.Modules;
@@ -8,6 +9,9 @@
     {
         public override void Load()
         {
+            // Infrastructure
+            Bind<IMediator>().To<Mediator>().InSingletonScope();
+
             // Managers
             Bind<ISettingManager>().To<SettingManager>().InSingletonScope();
             Bind<ITimerManager>().To<TimerManager>().InSingletonScope();

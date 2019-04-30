@@ -28,6 +28,17 @@
 
         public void SetTimeGapObject(TimeGapModel gapModel) => this.gapModel = gapModel;
 
+        public void SetDeadlineFromSettingModel(SettingModel settingModel)
+        {
+            this.timer.Stop();
+
+            this.deadline = DateTime.Now + new TimeSpan(0, Int32.Parse(settingModel.SettingMinute), Int32.Parse(settingModel.SettingSecond));
+
+            this.timer.Start();
+        }
+
+        public void StopTimer() => this.timer.Stop();
+
         private void kdTimer_Tick(object sender, EventArgs e)
         {
             if (this.gapModel == null)

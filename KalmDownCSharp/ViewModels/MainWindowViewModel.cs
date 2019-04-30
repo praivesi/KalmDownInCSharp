@@ -1,16 +1,16 @@
 ﻿namespace KalmDownCSharp.ViewModels
 {
     using KalmDownCSharp.Commands;
+    using KalmDownCSharp.Infrastructure;
     using KalmDownCSharp.Managers;
     using KalmDownCSharp.Models;
     using KalmDownCSharp.UIs;
-    using System.ComponentModel;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
     using System.Windows.Media.Animation;
 
-    internal class MainWindowViewModel : IMainWindowViewModel, INotifyPropertyChanged
+    internal class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     {
         private readonly ITimerManager timerManager;
         private readonly ISettingManager settingManager;
@@ -19,6 +19,7 @@
         private ICommand showSettingWindowCommand;
 
         private readonly ISettingWindowViewModel settingWindowVM;
+        private readonly IMediator mediator;
 
         public TimeGapModel GapModel
         {
@@ -48,7 +49,8 @@
         public MainWindowViewModel(
             ITimerManager timerManager,
             ISettingManager settingManager,
-            ISettingWindowViewModel settingWindowVM)
+            ISettingWindowViewModel settingWindowVM,
+            IMediator mediator)
         {
             this.gapModel = new TimeGapModel();
 
@@ -58,8 +60,16 @@
             this.timerManager.SetTimeGapObject(this.gapModel);
 
             this.settingWindowVM = settingWindowVM;
+            this.mediator = mediator;
 
             this.showSettingWindowCommand = new BaseCommand(this.ShowSettingWindow);
+
+            this.RegisterEvents();
+        }
+
+        private void RegisterEvents()
+        {
+            this.mediator.Register("SettingChanged", this.OnSettingChanged);
         }
 
         public Storyboard CreateCatStoryboard(Grid catGrid, PropertyPath propertyPath)
@@ -84,15 +94,9 @@
             settingsWindow.ShowDialog();
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-      
-        protected void OnPropertyChanged(string name)
+        public void OnSettingChanged(object parameter)
         {
-            var handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(name));
-            }
+            this.timerManager.SetDeadlineFromSettingModel(this.settingManager.Settings);
         }
     }
 }

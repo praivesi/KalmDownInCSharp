@@ -18,8 +18,6 @@
             this.Settings.SettingMinute = changeMinute;
             this.Settings.SettingSecond = changeSecond;
             this.Settings.SettingColor = changeColor;
-
-            MessageBox.Show("SettingMinute = " + this.Settings.SettingMinute + " / SettingSecond = " + this.Settings.SettingSecond + " / SettingColor = " + this.Settings.SettingColor);
         }
 
         public Duration GetSettingDuration()

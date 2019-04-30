@@ -104,6 +104,8 @@
     </ApplicationDefinition>
     <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="DI\KalmDownModule.cs" />
+    <Compile Include="Infrastructure\IMediator.cs" />
+    <Compile Include="Infrastructure\Mediator.cs" />
     <Compile Include="Managers\ISettingManager.cs" />
     <Compile Include="Managers\ITimerManager.cs" />
     <Compile Include="Managers\SettingManager.cs" />
@@ -122,6 +124,7 @@
     <Compile Include="ViewModels\ISettingWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\SettingWindowViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
